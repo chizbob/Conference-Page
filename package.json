@@ -1,0 +1,29 @@
+{
+  "name": "capstone-conference-page",
+  "version": "1.0.0",
+  "description": "Capstone project: make a conference page",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chizbob/Conference-Page.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chizbob/Conference-Page/issues"
+  },
+  "homepage": "https://github.com/chizbob/Conference-Page#readme",
+  "devDependencies": {
+    "jasmine": "^3.4.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}
