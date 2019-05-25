@@ -5,15 +5,30 @@ const router = express.Router();
 const speakersRoute = require("./speakers")
 const feedbackRoute = require("./feedback")
 
-module.exports = () => {
-  router.get("/", (req, res, next) => {
-    return res.render("index", {
-      page: "Home",
-    })
+module.exports = (param) => {
+
+  const { speakerService } = param
+
+  router.get("/", async (req, res, next) => {
+    try {
+      const promises = []
+      promises.push(speakerService.getListShort())
+      promises.push(speakerService.getAllArtwork())
+
+      const results = await Promise.all(promises)
+
+      return res.render("index", {
+        page: "Home",
+        speakerslist: results[0],
+        artwork: results[0]
+      })
+      } catch(err) {
+          return next(err)
+      }
   })
 
-  router.use("/speakers", speakersRoute())
-  router.use("/feedback", feedbackRoute())
+  router.use("/speakers", speakersRoute(param))
+  router.use("/feedback", feedbackRoute(param))
 
   return router
 }

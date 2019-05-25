@@ -13,7 +13,7 @@ header
       #navbar-collapse.collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            a(href='/index.html') Home
+            a(href='/') Home
           li
             a.dropdown-toggle(href='/speakers.html', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
               | Speakers
@@ -21,16 +21,13 @@ header
                 span
             ul.dropdown-menu
               li
-                a(href='/speakers.html') All Speakers
+                a(href='/speakers') All Speakers
               li.divider(role='separator')
-              li
-                a(href='/speakers/Lorenzo_Garcia') Lorenzo Garcia
-              li
-                a(href='/Hillary_Goldwynn.html') Hilary Goldywynn Post
-              li
-                a(href='/speakers/Riley_Rewington') Riley Rudolph Rewington
+              each speaker in speakerNames
+                li
+                  a(href=`/speakers/${speaker.shortname}`)=speaker.name
           li
-            a(href='/feedback.html') Feedback
+            a(href='/feedback') Feedback
         // nav
         // navbar-collapse
         // container
