@@ -40,7 +40,7 @@ module.exports = (param) => {
         speaker: results[0],
         artwork: results[1],
       })
-      
+
     } catch(err){
       return next(err)
     }
