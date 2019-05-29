@@ -5,10 +5,14 @@ const configs = require("./config")
 const appConfig = require("./config/main-config.js")
 const SpeakerService = require("./services/SpeakerService")
 const app = express();
+const port = normalizePort(process.env.PORT || "3000")
+app.set("port", port)
 
 const config = configs[app.get("env")]
 
 const speakerService = new SpeakerService(config.data.speakers)
+
+appConfig.init()
 
 app.set("view engine", "pug")
 if(app.get("env") === "development"){
@@ -52,6 +56,17 @@ app.use((err, req, res, next) => {
   return res.render("error")
 })
 
-app.listen(3000)
+app.listen(port)
+
+function normalizePort(val){
+  const port = parseInt(val, 10)
+  if(isNaN(port)){
+    return val
+  }
+  if(port >= 0){
+    return port
+  }
+  return false
+}
 
 module.export = app
