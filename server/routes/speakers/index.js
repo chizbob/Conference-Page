@@ -35,7 +35,7 @@ module.exports = (param) => {
         return next()
       }
 
-      return res.render("speaker/detail", {
+      return res.render("speakers/detail", {
         page: req.params.name,
         speaker: results[0],
         artwork: results[1],
