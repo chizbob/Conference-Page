@@ -2,8 +2,10 @@ const express = require("express");
 const createError = require("http-errors")
 const path = require("path")
 const configs = require("./config")
+const bodyParser = require("body-parser")
 // const appConfig = require("./config/main-config.js")
 const SpeakerService = require("./services/SpeakerService")
+const FeedbackService = require("./services/FeedbackService")
 const app = express();
 const port = normalizePort(process.env.PORT || "3000")
 app.set("port", port)
@@ -11,7 +13,7 @@ app.set("port", port)
 const config = configs[app.get("env")]
 
 const speakerService = new SpeakerService(config.data.speakers)
-
+const feedbackService = new FeedbackService(config.data.feedback)
 // appConfig.init()
 
 app.set("view engine", "pug")
@@ -28,6 +30,8 @@ app.use(express.static("public"))
 //   return res.sendStatus(204)
 // })
 
+app.use(bodyParser.urlencoded({extended: true}))
+
 app.use(async (req, res, next) =>{
     try {
       const names = await speakerService.getNames()
@@ -40,7 +44,8 @@ app.use(async (req, res, next) =>{
 })
 
 app.use("/", routes({
-  speakerService
+  speakerService,
+  feedbackService
 }))
 
 app.use((req, res, next) => {
